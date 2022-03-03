@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Apache Flink简单上手之WordCount"/>
+
+
+
+
+  <meta name="keywords" content="Apache Flink," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Time is the only currency" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://example.com/2022/03/03/Apache-Flink简单上手之WordCount/"/>
+
+
+<meta name="description" content="Apache Flink简单上手之WordCount一、新建项目   二、引入依赖pom.xml内容 123456789101112131415161718192021222324&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache Flink简单上手之WordCount">
+<meta property="og:url" content="http://example.com/2022/03/03/Apache-Flink%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E4%B9%8BWordCount/index.html">
+<meta property="og:site_name" content="Time is the only currency">
+<meta property="og:description" content="Apache Flink简单上手之WordCount一、新建项目   二、引入依赖pom.xml内容 123456789101112131415161718192021222324&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.or">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303234520002.png">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20220303234543308.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303234606918.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303234829748.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303235224364.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303235234878.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303235405081.png">
+<meta property="article:published_time" content="2022-03-03T15:55:24.000Z">
+<meta property="article:modified_time" content="2022-03-03T15:56:31.402Z">
+<meta property="article:author" content="zjh">
+<meta property="article:tag" content="Apache Flink">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303234520002.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Apache Flink简单上手之WordCount - Time is the only currency </title>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Time is the only currency</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Apache Flink简单上手之WordCount
+        
+      </h1>
+
+      <time class="post-time">
+          Mar 03 2022
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h3 id="Apache-Flink简单上手之WordCount"><a href="#Apache-Flink简单上手之WordCount" class="headerlink" title="Apache Flink简单上手之WordCount"></a>Apache Flink简单上手之WordCount</h3><h4 id="一、新建项目"><a href="#一、新建项目" class="headerlink" title="一、新建项目"></a>一、新建项目</h4><p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303234520002.png" alt="image-20220303234520002"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220303234543308.png" alt="image-20220303234543308"></p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303234606918.png" alt="image-20220303234606918"></p>
+<h4 id="二、引入依赖"><a href="#二、引入依赖" class="headerlink" title="二、引入依赖"></a>二、引入依赖</h4><p>pom.xml内容</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.atguigu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-tutorial<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.10.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-streaming-java_2.12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.10.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="三、新建批处理WordCount类"><a href="#三、新建批处理WordCount类" class="headerlink" title="三、新建批处理WordCount类"></a>三、新建批处理WordCount类</h4><p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303234829748.png" alt="image-20220303234829748"></p>
+<p>WordCount.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//批处理word count</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordCount</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//创建执行环境</span></span><br><span class="line">        ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line">        <span class="comment">//从文件中读取数据</span></span><br><span class="line">        String inputPath = <span class="string">&quot;E:\\code\\IntelliJ IDEA Project\\flink-wordcount\\src\\main\\resources\\hello.txt&quot;</span>;</span><br><span class="line">        DataSet&lt;String&gt; inputDataSet = env.readTextFile(inputPath);</span><br><span class="line">        <span class="comment">//对数据集进行处理，按空格分词展开，转换成（word,1)二元组进行统计</span></span><br><span class="line">        DataSet&lt;Tuple2&lt;String, Integer&gt;&gt; resultSet = inputDataSet.flatMap(<span class="keyword">new</span> MyFlatMapper())</span><br><span class="line">                .groupBy(<span class="number">0</span>) <span class="comment">//按照第一个位置的word分组</span></span><br><span class="line">                .sum(<span class="number">1</span>); <span class="comment">//将第二个位置上的数据求和</span></span><br><span class="line">        resultSet.print();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>MyFlatMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFlatMapper</span> <span class="keyword">implements</span> <span class="title">FlatMapFunction</span>&lt;<span class="title">String</span>, <span class="title">Tuple2</span>&lt;<span class="title">String</span>, <span class="title">Integer</span>&gt;&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">flatMap</span><span class="params">(String value, Collector&lt;Tuple2&lt;String, Integer&gt;&gt; out)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//按空格分词</span></span><br><span class="line">        String[] words = value.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        <span class="comment">//遍历所有word,包成二元组输出</span></span><br><span class="line">        <span class="keyword">for</span> (String word : words) &#123;</span><br><span class="line">            out.collect(<span class="keyword">new</span> Tuple2&lt;String, Integer&gt;(word, <span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在resource目录新建一个测试文本：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303235224364.png" alt="image-20220303235224364"></p>
+<p>运行WordCount的main方法,效果：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303235234878.png" alt="image-20220303235234878"></p>
+<h4 id="四、新建流处理StreamWordCount类"><a href="#四、新建流处理StreamWordCount类" class="headerlink" title="四、新建流处理StreamWordCount类"></a>四、新建流处理StreamWordCount类</h4><p>StreamWordCount.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StreamWordCount</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//创建执行环境</span></span><br><span class="line">        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//从文件中读取数据</span></span><br><span class="line">        String inputPath = <span class="string">&quot;E:\\code\\IntelliJ IDEA Project\\flink-wordcount\\src\\main\\resources\\hello.txt&quot;</span>;</span><br><span class="line">        DataStream&lt;String&gt; inputStream = env.readTextFile(inputPath);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//基于数据流进行转换计算</span></span><br><span class="line">        DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; resultStream = inputStream.flatMap(<span class="keyword">new</span> MyFlatMapper())</span><br><span class="line">                .keyBy(<span class="number">0</span>)</span><br><span class="line">                .sum(<span class="number">1</span>);</span><br><span class="line">        resultStream.print();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//执行任务</span></span><br><span class="line">        env.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行StreamWordCount的main方法，效果：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303235405081.png" alt="image-20220303235405081"></p>
+<p>至此，一个简单WordCount的批处理和流处理例子就完成了。</p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Apache-Flink/">Apache Flink</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2022/03/03/Java-8-%E6%96%B0%E7%89%B9%E6%80%A7/">
+        <span class="next-text nav-default">Java 8 新特性</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2022
+    <span class="footer-author">zjh.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> and <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
