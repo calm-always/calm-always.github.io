@@ -35,12 +35,12 @@
 <link rel="canonical" href="http://example.com/2022/03/03/Apache-Flink简单上手之WordCount/"/>
 
 
-<meta name="description" content="Apache Flink简单上手之WordCount一、安装Apache Flink（Standalone模式）上传并解压缩 flink-1.10.1-bin-scala_2.12.tgz 启动flink 1.&#x2F;start-cluster.sh   访问http:&#x2F;&#x2F;localhost:8081  一、WordCount项目创建即编写1.新建项目   2.引入依赖pom.xml内容 1234567">
+<meta name="description" content="Apache Flink简单上手之WordCount一、安装Apache Flink（Standalone模式）上传并解压缩 flink-1.10.1-bin-scala_2.12.tgz 启动flink 1.&#x2F;start-cluster.sh   访问http:&#x2F;&#x2F;localhost:8081  二、WordCount项目创建即编写1.新建项目   2.引入依赖pom.xml内容 1234567">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Apache Flink简单上手之WordCount">
 <meta property="og:url" content="http://example.com/2022/03/03/Apache-Flink%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E4%B9%8BWordCount/index.html">
 <meta property="og:site_name" content="Time is the only currency">
-<meta property="og:description" content="Apache Flink简单上手之WordCount一、安装Apache Flink（Standalone模式）上传并解压缩 flink-1.10.1-bin-scala_2.12.tgz 启动flink 1.&#x2F;start-cluster.sh   访问http:&#x2F;&#x2F;localhost:8081  一、WordCount项目创建即编写1.新建项目   2.引入依赖pom.xml内容 1234567">
+<meta property="og:description" content="Apache Flink简单上手之WordCount一、安装Apache Flink（Standalone模式）上传并解压缩 flink-1.10.1-bin-scala_2.12.tgz 启动flink 1.&#x2F;start-cluster.sh   访问http:&#x2F;&#x2F;localhost:8081  二、WordCount项目创建即编写1.新建项目   2.引入依赖pom.xml内容 1234567">
 <meta property="og:locale">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220306233312917.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220306233431330.png">
@@ -51,8 +51,11 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303235224364.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303235234878.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303235405081.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220307224551601.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220307224613637.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220307225441440.png">
 <meta property="article:published_time" content="2022-03-03T15:55:24.000Z">
-<meta property="article:modified_time" content="2022-03-06T15:38:19.469Z">
+<meta property="article:modified_time" content="2022-03-07T14:55:14.130Z">
 <meta property="article:author" content="zjh">
 <meta property="article:tag" content="Apache Flink">
 <meta name="twitter:card" content="summary">
@@ -147,7 +150,7 @@
 <p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220306233312917.png" alt="image-20220306233312917"></p>
 <p>访问<a target="_blank" rel="noopener" href="http://localhost:8081/">http://localhost:8081</a></p>
 <p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220306233431330.png" alt="image-20220306233431330"></p>
-<h4 id="一、WordCount项目创建即编写"><a href="#一、WordCount项目创建即编写" class="headerlink" title="一、WordCount项目创建即编写"></a>一、WordCount项目创建即编写</h4><h5 id="1-新建项目"><a href="#1-新建项目" class="headerlink" title="1.新建项目"></a>1.新建项目</h5><p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303234520002.png" alt="image-20220303234520002"></p>
+<h4 id="二、WordCount项目创建即编写"><a href="#二、WordCount项目创建即编写" class="headerlink" title="二、WordCount项目创建即编写"></a>二、WordCount项目创建即编写</h4><h5 id="1-新建项目"><a href="#1-新建项目" class="headerlink" title="1.新建项目"></a>1.新建项目</h5><p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303234520002.png" alt="image-20220303234520002"></p>
 <p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220303234543308.png" alt="image-20220303234543308"></p>
 <p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303234606918.png" alt="image-20220303234606918"></p>
 <h5 id="2-引入依赖"><a href="#2-引入依赖" class="headerlink" title="2.引入依赖"></a>2.引入依赖</h5><p>pom.xml内容</p>
@@ -169,8 +172,19 @@
 
 <p>执行StreamWordCount的main方法，效果：</p>
 <p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220303235405081.png" alt="image-20220303235405081"></p>
-<p>至此，一个简单WordCount的批处理和流处理例子就完成了。</p>
+<h5 id="5-无界流演示"><a href="#5-无界流演示" class="headerlink" title="5.无界流演示"></a>5.无界流演示</h5><p>从socket中读取数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StreamSocketWordCount</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//创建执行环境</span></span><br><span class="line">        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line">        env.setParallelism(<span class="number">1</span>);<span class="comment">//设置并行度</span></span><br><span class="line">        <span class="comment">//从socket中读取数据</span></span><br><span class="line">        DataStream&lt;String&gt; inputDataStream = env.socketTextStream(<span class="string">&quot;192.168.254.167&quot;</span>, <span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//基于数据流进行转换计算</span></span><br><span class="line">        DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; resultStream = inputDataStream.flatMap(<span class="keyword">new</span> MyFlatMapper())</span><br><span class="line">                .keyBy(<span class="number">0</span>)</span><br><span class="line">                .sum(<span class="number">1</span>);</span><br><span class="line">        resultStream.print();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//执行任务</span></span><br><span class="line">        env.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>在linux客户端使用nc命令启动一个不断产生数据的服务端：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220307224551601.png" alt="image-20220307224551601"></p>
+<p>读取结果：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220307224613637.png" alt="image-20220307224613637"></p>
+<h5 id="6-ParameterTool工具的使用"><a href="#6-ParameterTool工具的使用" class="headerlink" title="6.ParameterTool工具的使用"></a>6.ParameterTool工具的使用</h5><p>使用ParameterTool动态获取参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParameterToolForStreamWordCount</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//创建执行环境</span></span><br><span class="line">        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line">        env.setParallelism(<span class="number">1</span>);<span class="comment">//设置并行度</span></span><br><span class="line"></span><br><span class="line">        ParameterTool parameterTool = ParameterTool.fromArgs(args);</span><br><span class="line">        String host = parameterTool.get(<span class="string">&quot;host&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> port = parameterTool.getInt(<span class="string">&quot;port&quot;</span>);</span><br><span class="line">        <span class="comment">//从socket中读取数据</span></span><br><span class="line">        DataStream&lt;String&gt; inputDataStream = env.socketTextStream(host, port);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//基于数据流进行转换计算</span></span><br><span class="line">        DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; resultStream = inputDataStream.flatMap(<span class="keyword">new</span> MyFlatMapper())</span><br><span class="line">                .keyBy(<span class="number">0</span>)</span><br><span class="line">                .sum(<span class="number">1</span>);</span><br><span class="line">        resultStream.print();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//执行任务</span></span><br><span class="line">        env.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>idea程序运行传参配置：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220307225441440.png" alt="image-20220307225441440"></p>
+<h4 id="三、提价Job到Apache-Flink"><a href="#三、提价Job到Apache-Flink" class="headerlink" title="三、提价Job到Apache Flink"></a>三、提价Job到Apache Flink</h4>
             </div>
           
 
