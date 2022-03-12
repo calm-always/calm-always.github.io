@@ -56,7 +56,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220309233752742.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220309233818875.png">
 <meta property="article:published_time" content="2022-03-09T14:53:27.000Z">
-<meta property="article:modified_time" content="2022-03-09T16:31:06.232Z">
+<meta property="article:modified_time" content="2022-03-12T13:17:06.942Z">
 <meta property="article:author" content="zjh">
 <meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
@@ -196,6 +196,13 @@
 <p>CachedThreadPool允许创建数量为Integer.MAX_VALUE的线程，可能会创建大量的线程，导致OOM。</p>
 <h5 id="2-根据需要手动创建"><a href="#2-根据需要手动创建" class="headerlink" title="2.根据需要手动创建"></a>2.根据需要手动创建</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executorService = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">5</span>,</span><br><span class="line">                <span class="number">10</span>,</span><br><span class="line">                <span class="number">3L</span>,</span><br><span class="line">                TimeUnit.SECONDS,</span><br><span class="line">                <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;(<span class="number">5</span>),</span><br><span class="line">                Executors.defaultThreadFactory());</span><br></pre></td></tr></table></figure>
 
+<p>推荐使用Guava的ThreadFactory</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.guava<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>guava<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>14.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ThreadFactory namedThreadFactory = <span class="keyword">new</span> ThreadFactoryBuilder().setNameFormat(<span class="string">&quot;thread-call-runner-%d&quot;</span>).build();</span><br><span class="line">ExecutorService executorService = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>, <span class="number">200L</span>, TimeUnit.MILLISECONDS, <span class="keyword">new</span> ArrayBlockingQueue&lt;Runnable&gt;(<span class="number">1</span>), namedThreadFactory, <span class="keyword">new</span> ThreadPoolExecutor.AbortPolicy());</span><br></pre></td></tr></table></figure>
+
+
+
 <h4 id="七、线程池如何配置线程数"><a href="#七、线程池如何配置线程数" class="headerlink" title="七、线程池如何配置线程数"></a>七、线程池如何配置线程数</h4><h5 id="1-CUP密集型"><a href="#1-CUP密集型" class="headerlink" title="1.CUP密集型"></a>1.CUP密集型</h5><h5 id="2-IO密集型"><a href="#2-IO密集型" class="headerlink" title="2.IO密集型"></a>2.IO密集型</h5>
             </div>
           
@@ -213,6 +220,12 @@
         
         
   <nav class="post-nav">
+    
+      <a class="prev" href="/2022/03/10/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A-%E7%AC%94%E8%AE%B0/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">MySQL必知必会-笔记</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
     
     
       <a class="next" href="/2022/03/08/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
