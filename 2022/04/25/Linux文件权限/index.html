@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Linux文件权限"/>
+
+
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Time is the only currency" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://example.com/2022/04/25/Linux文件权限/"/>
+
+
+<meta name="description" content="一、Linux的安全性用户权限是通过创建用户时分配的用户ID（UserID,通常缩写为UID）来跟踪的。UID是数值，每个用户都有唯一的UID。 1. &#x2F;etc&#x2F;passwd文件 Linux账户分为系统账户和普通账户，普通账户使用的是500以上的UID值。 &#x2F;etc&#x2F;passwd文件的字段: 1root:x:0:0:root:&#x2F;root:&#x2F;bin&#x2F;bash  以冒号分隔，它包含以下信息：  登录用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux文件权限">
+<meta property="og:url" content="http://example.com/2022/04/25/Linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/index.html">
+<meta property="og:site_name" content="Time is the only currency">
+<meta property="og:description" content="一、Linux的安全性用户权限是通过创建用户时分配的用户ID（UserID,通常缩写为UID）来跟踪的。UID是数值，每个用户都有唯一的UID。 1. &#x2F;etc&#x2F;passwd文件 Linux账户分为系统账户和普通账户，普通账户使用的是500以上的UID值。 &#x2F;etc&#x2F;passwd文件的字段: 1root:x:0:0:root:&#x2F;root:&#x2F;bin&#x2F;bash  以冒号分隔，它包含以下信息：  登录用">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220426214333773.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220426215022730.png">
+<meta property="article:published_time" content="2022-04-25T13:19:19.000Z">
+<meta property="article:modified_time" content="2022-04-26T14:35:03.610Z">
+<meta property="article:author" content="zjh">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220426214333773.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Linux文件权限 - Time is the only currency </title>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Time is the only currency</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Linux文件权限
+        
+      </h1>
+
+      <time class="post-time">
+          Apr 25 2022
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h3 id="一、Linux的安全性"><a href="#一、Linux的安全性" class="headerlink" title="一、Linux的安全性"></a>一、Linux的安全性</h3><p>用户权限是通过创建用户时分配的用户ID（UserID,通常缩写为UID）来跟踪的。UID是数值，每个用户都有唯一的UID。</p>
+<h4 id="1-etc-passwd文件"><a href="#1-etc-passwd文件" class="headerlink" title="1. /etc/passwd文件"></a>1. /etc/passwd文件</h4><p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220426214333773.png" alt="image-20220426214333773"></p>
+<p>Linux账户分为<strong>系统账户</strong>和<strong>普通账户</strong>，普通账户使用的是500以上的UID值。</p>
+<p>/etc/passwd文件的字段:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root:x:0:0:root:/root:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>以冒号分隔，它包含以下信息：</p>
+<ul>
+<li>登录用户名</li>
+<li>用户密码</li>
+<li>用户账户的UID（数字形式）</li>
+<li>用户账户的组ID（GID）（数字形式）</li>
+<li>用户账户的文本描述（备注字段）</li>
+<li>用户HOME目录的位置</li>
+<li>用户的默认shell</li>
+</ul>
+<h4 id="2-etc-shadow文件"><a href="#2-etc-shadow文件" class="headerlink" title="2./etc/shadow文件"></a>2./etc/shadow文件</h4><p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220426215022730.png" alt="image-20220426215022730"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin:*:16659:0:99999:7:::</span><br></pre></td></tr></table></figure>
+
+<p>每条记录中都有9个字段：</p>
+<ul>
+<li>与/etc/passwd文件中的登录名字段对应的登录名</li>
+<li>加密后的密码</li>
+<li>自上次修改密码后过去的天数（自1970年1月1日开始计算）</li>
+<li>多少天后才能更改密码</li>
+<li>多少天后必须更改密码</li>
+<li>密码过期前提前多少天提醒用户更改密码</li>
+<li>密码过期后多少天禁用用户账户</li>
+<li>用户账户被禁用的日期（用自1970年1月1日到当天的天数表示）</li>
+<li>预留字段给将来使用</li>
+</ul>
+<h4 id="3-添加新用户（useradd"><a href="#3-添加新用户（useradd" class="headerlink" title="3.添加新用户（useradd)"></a>3.添加新用户（useradd)</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c comment</td>
+<td>给新用户添加备注</td>
+</tr>
+<tr>
+<td>-d home_dir</td>
+<td>为主目录指定一个名字（如果不想用登录名作为主目录名的话）</td>
+</tr>
+<tr>
+<td>-e expire_date</td>
+<td>用YYYY-MM-DD格式指定一个账户过期的日期</td>
+</tr>
+<tr>
+<td>-f inactive_days</td>
+<td>指定这个账户密码过期后多少天这个账户被禁用；0表示密码一过期就立即禁用，1表示禁用这个功能</td>
+</tr>
+<tr>
+<td>-g initial_group</td>
+<td>指定用户登录组的GID或组名</td>
+</tr>
+<tr>
+<td>-G group</td>
+<td>指定用户除登录组之外所属的一个或多个附加组</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>必须和-m一起使用，将/etc/skel目录的内容复制到用户的HOME目录</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>创建用户的HOME目录</td>
+</tr>
+<tr>
+<td>-M</td>
+<td>不创建用户的HOME目录（当默认设置里要求创建时才使用这个选项）</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>创建一个与用户登录名同名的新组</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>创建系统账户</td>
+</tr>
+<tr>
+<td>-p passwd</td>
+<td>为用户账户指定默认密码</td>
+</tr>
+<tr>
+<td>-s shell</td>
+<td>指定默认的登录shell</td>
+</tr>
+<tr>
+<td>-u uid</td>
+<td>为账户指定唯一的UID</td>
+</tr>
+</tbody></table>
+<p>useradd更改默认值的参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b default_home</td>
+<td>更改默认的创建用户HOME目录的位置</td>
+</tr>
+<tr>
+<td>-e expiration_date</td>
+<td>更改默认的新账户的过期日期</td>
+</tr>
+<tr>
+<td>-f inactive</td>
+<td>更改默认的新用户从密码过期到账户被禁用的天数</td>
+</tr>
+<tr>
+<td>-g group</td>
+<td>更改默认的组名称或GID</td>
+</tr>
+<tr>
+<td>-s shell</td>
+<td>更改默认的登录shell</td>
+</tr>
+</tbody></table>
+<h4 id="4-删除账户（userdel"><a href="#4-删除账户（userdel" class="headerlink" title="4.删除账户（userdel)"></a>4.删除账户（userdel)</h4><p>默认情况下，userdel只会删除/etc/passwd文件中的用户信息，不会删除用户的文件。加上-r参数，userdel会删除用户的HOME目录以及邮件目录。</p>
+<h4 id="5-修改用户"><a href="#5-修改用户" class="headerlink" title="5.修改用户"></a>5.修改用户</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>usermod</td>
+<td>修改用户账户的字段，还可以指定主要组以及附加组的所属关系</td>
+</tr>
+<tr>
+<td>passwd</td>
+<td>修改已有用户的密码</td>
+</tr>
+<tr>
+<td>chpasswd</td>
+<td>从文件中读取登录名密码对，并更新密码</td>
+</tr>
+<tr>
+<td>chage</td>
+<td>修改密码的过期日期</td>
+</tr>
+<tr>
+<td>chfn</td>
+<td>修改用户账户的备注信息</td>
+</tr>
+<tr>
+<td>chsh</td>
+<td>修改用户账户的默认登录shell</td>
+</tr>
+</tbody></table>
+<p>5.1usermod</p>
+<p>参数大部分跟useradd命令的参数意义。另外还有一些其他可能有用的选项：</p>
+<ul>
+<li>-l 修改用户账户的登录名</li>
+<li>-L 锁定账户，使用户无法登录</li>
+<li>-p 修改账户的秘密</li>
+<li>-U 解除锁定，使用户能够登录</li>
+</ul>
+<p>5.2 passwd和chpasswd</p>
+<p>passwd命令用户修改用户自己的秘密。root用户可以修改其他账户的秘密。</p>
+<p>chpasswd命令可以从标准输入自动读取登录名和密码对（冒号分割）列表，给密码加密，然后为用户账户设置。</p>
+<p>5.3 chsh、chfn和chage</p>
+<p>chsh用来修改用户登录shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /bin/csh test</span><br></pre></td></tr></table></figure>
+
+<p>chfn命令提供了在/etc/passwd文件的备注字段中存储信息的标准方法。</p>
+<p>chage命令用来帮助用户管理用户账户的有效期。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d</td>
+<td>设置上次修改密码到现在的天数</td>
+</tr>
+<tr>
+<td>-E</td>
+<td>设置密码过期的日期</td>
+</tr>
+<tr>
+<td>-I</td>
+<td>设置密码过期到锁定账户的天数</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>设置修改密码之间最少要多少天</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>设置密码过期前多久开始出现提醒信息</td>
+</tr>
+</tbody></table>
+<p>chage命令的日期值可以是：</p>
+<ul>
+<li>YYYY-MM-DD格式的日期</li>
+<li>代表从1970年1月1日起到该日期天数的数值</li>
+</ul>
+<p>过期的账户跟锁定的账户很相似，账户仍然存在，但用户无法用它登录。</p>
+<h3 id="二、使用Linux组"><a href="#二、使用Linux组" class="headerlink" title="二、使用Linux组"></a>二、使用Linux组</h3><h3 id="三、理解文件权限"><a href="#三、理解文件权限" class="headerlink" title="三、理解文件权限"></a>三、理解文件权限</h3><h3 id="四、改变安全性设置"><a href="#四、改变安全性设置" class="headerlink" title="四、改变安全性设置"></a>四、改变安全性设置</h3>
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/linux/">linux</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2022/04/20/Jmeter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+        <span class="next-text nav-default">Jmeter学习笔记</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2022
+    <span class="footer-author">zjh.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> and <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
