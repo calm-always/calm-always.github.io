@@ -54,8 +54,17 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502155417141.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502160833472.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502161741951.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502203604231.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502203751533.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502203931449.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502204433828.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502204641710.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502205132223.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502205522370.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502210104954.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502210242985.png">
 <meta property="article:published_time" content="2022-05-01T02:43:58.000Z">
-<meta property="article:modified_time" content="2022-05-02T08:33:30.670Z">
+<meta property="article:modified_time" content="2022-05-02T13:03:51.104Z">
 <meta property="article:author" content="zjh">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="shell">
@@ -203,7 +212,95 @@
 
 <p>Linux系统会同时执行这个两个命令，在系统内部将它们连接起来。在第一个命令产生输出的同时，输出会被立即送给第二个命令。数据传输不会用到任何中间文件或缓冲区。</p>
 <p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502161741951.png" alt="image-20220502161741951"></p>
-<h3 id="七、执行数学运算"><a href="#七、执行数学运算" class="headerlink" title="七、执行数学运算"></a>七、执行数学运算</h3><h3 id="八、退出脚本"><a href="#八、退出脚本" class="headerlink" title="八、退出脚本"></a>八、退出脚本</h3>
+<h3 id="七、执行数学运算"><a href="#七、执行数学运算" class="headerlink" title="七、执行数学运算"></a>七、执行数学运算</h3><h4 id="1-expr"><a href="#1-expr" class="headerlink" title="1.expr"></a>1.expr</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expr 1 + 2</span><br></pre></td></tr></table></figure>
+
+<p>有一些特殊符号需要用转义符才能生效，比如*</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expr 2 \* 3</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-使用方括号"><a href="#2-使用方括号" class="headerlink" title="2.使用方括号"></a>2.使用方括号</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1=$[2 + 3]</span><br><span class="line">var2=$[$var1 * 3]</span><br></pre></td></tr></table></figure>
+
+<p>bash shell数学运算符只支持整数运算。</p>
+<h4 id="3-浮点解决方案"><a href="#3-浮点解决方案" class="headerlink" title="3.浮点解决方案"></a>3.浮点解决方案</h4><p>使用内建的bash计算器，叫做bc，可以解决bash中数学运算的整数限制。</p>
+<h5 id="3-1-bc的基本用法"><a href="#3-1-bc的基本用法" class="headerlink" title="3.1 bc的基本用法"></a>3.1 bc的基本用法</h5><p>bash计算器能够识别：</p>
+<ul>
+<li>数字（整数和浮点数）</li>
+<li>变量（简单变量和数组）</li>
+<li>注释（以#或C语言中的/* */开始的行）</li>
+<li>表达式</li>
+<li>编程语句（例如if-then语句）</li>
+<li>函数</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502203604231.png" alt="image-20220502203604231"></p>
+<p>bc的浮点运算是由内建变量scale控制的。使用它可以设置保留的小数数位。scale的默认值是0.</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502203751533.png" alt="image-20220502203751533"></p>
+<p>bash计算器还能支持变量：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502203931449.png" alt="image-20220502203931449"></p>
+<h5 id="3-2在脚本中使用bc"><a href="#3-2在脚本中使用bc" class="headerlink" title="3.2在脚本中使用bc"></a>3.2在脚本中使用bc</h5><p>基本格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable=$(echo &quot;options; expression&quot; | bc)</span><br></pre></td></tr></table></figure>
+
+<p>第一部分options用来设置变量。如果不止一个变量，可以用分号分开。expression参数定义了通过bc执行的数学表达式。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502204433828.png" alt="image-20220502204433828"></p>
+<p>也可以使用在脚本中定义好变量：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502204641710.png" alt="image-20220502204641710"></p>
+<p>bc还可以和内联重定向一起使用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">variable=$(bc &lt;&lt; EOF</span><br><span class="line">options</span><br><span class="line">statements</span><br><span class="line">expression</span><br><span class="line">EOF</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502205132223.png" alt="image-20220502205132223"></p>
+<h3 id="八、退出脚本"><a href="#八、退出脚本" class="headerlink" title="八、退出脚本"></a>八、退出脚本</h3><h4 id="1-查看退出状态码"><a href="#1-查看退出状态码" class="headerlink" title="1.查看退出状态码"></a>1.查看退出状态码</h4><p>Linux提供了一个专门的变量$?来保存上个已经执行命令的退出状态码。对于需要进行检查的命令，必须在其运行完毕后立刻查看或使用$?变量。它的值会变成由shell所执行的最后一条命令的退出状态码。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502205522370.png" alt="image-20220502205522370"></p>
+<p>无效命令会返回一个退出状态码127。</p>
+<p><strong>Linux退出状态码</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>命令成功结束</td>
+</tr>
+<tr>
+<td>1</td>
+<td>一般性未知错误</td>
+</tr>
+<tr>
+<td>2</td>
+<td>不适合的shell命令</td>
+</tr>
+<tr>
+<td>126</td>
+<td>命令不可执行</td>
+</tr>
+<tr>
+<td>127</td>
+<td>没找到命令</td>
+</tr>
+<tr>
+<td>128</td>
+<td>无效的退出参数</td>
+</tr>
+<tr>
+<td>128+x</td>
+<td>与Linux信号x相关的严重错误</td>
+</tr>
+<tr>
+<td>130</td>
+<td>通过Ctrl+C终止的命令</td>
+</tr>
+<tr>
+<td>255</td>
+<td>正常范围之外的退出状态码</td>
+</tr>
+</tbody></table>
+<h4 id="2-exit命令"><a href="#2-exit命令" class="headerlink" title="2.exit命令"></a>2.exit命令</h4><p>一般情况下，shell脚本会以脚本中的最后一个命令的退出状态码退出。</p>
+<p>exit命令允许我们在脚本结束时指定一个退出状态码。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502210104954.png" alt="image-20220502210104954"></p>
+<p>也可以在exit命令的参数中使用变量：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220502210242985.png" alt="image-20220502210242985"></p>
+<p>需要注意的是，<strong>退出状态码最大只能是255</strong></p>
+
             </div>
           
 
