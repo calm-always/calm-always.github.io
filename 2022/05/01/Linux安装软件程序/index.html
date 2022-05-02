@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Linux安装软件程序"/>
+
+
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Time is the only currency" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://example.com/2022/05/01/Linux安装软件程序/"/>
+
+
+<meta name="description" content="一、基于Red Hat的系统1.列出已安装包1234yum list installed | moreyum list xterm #查看某个特定软件包的详细信息yum list installed xterm #查看包是否已安装yum provides filename #找出系统上的某个特定文件属于哪个软件包  2.用yum安装软件在线安装： 1yum insatll package_name">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux安装软件程序">
+<meta property="og:url" content="http://example.com/2022/05/01/Linux%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Time is the only currency">
+<meta property="og:description" content="一、基于Red Hat的系统1.列出已安装包1234yum list installed | moreyum list xterm #查看某个特定软件包的详细信息yum list installed xterm #查看包是否已安装yum provides filename #找出系统上的某个特定文件属于哪个软件包  2.用yum安装软件在线安装： 1yum insatll package_name">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-05-01T01:51:15.000Z">
+<meta property="article:modified_time" content="2022-05-01T02:21:15.634Z">
+<meta property="article:author" content="zjh">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Linux安装软件程序 - Time is the only currency </title>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Time is the only currency</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Linux安装软件程序
+        
+      </h1>
+
+      <time class="post-time">
+          May 01 2022
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h3 id="一、基于Red-Hat的系统"><a href="#一、基于Red-Hat的系统" class="headerlink" title="一、基于Red Hat的系统"></a>一、基于Red Hat的系统</h3><h4 id="1-列出已安装包"><a href="#1-列出已安装包" class="headerlink" title="1.列出已安装包"></a>1.列出已安装包</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum list installed | more</span><br><span class="line">yum list xterm #查看某个特定软件包的详细信息</span><br><span class="line">yum list installed xterm #查看包是否已安装</span><br><span class="line">yum provides filename #找出系统上的某个特定文件属于哪个软件包</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-用yum安装软件"><a href="#2-用yum安装软件" class="headerlink" title="2.用yum安装软件"></a>2.用yum安装软件</h4><p>在线安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum insatll package_name</span><br></pre></td></tr></table></figure>
+
+<p>本地安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum localinstall package_name.rpm</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-用yum更新软件"><a href="#3-用yum更新软件" class="headerlink" title="3.用yum更新软件"></a>3.用yum更新软件</h4><p>列出所有已安装包的可用更新：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list updates</span><br></pre></td></tr></table></figure>
+
+<p>更新特定软件包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update package_name</span><br></pre></td></tr></table></figure>
+
+<p>更新列表中的所有包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-用yum卸载软件"><a href="#4-用yum卸载软件" class="headerlink" title="4.用yum卸载软件"></a>4.用yum卸载软件</h4><p>只删除软件包而保留配置文件和数据文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove package_name</span><br></pre></td></tr></table></figure>
+
+<p>删除软件和它的所有文件，使用erase选项：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum erase package_name</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-处理损坏的包依赖关系"><a href="#5-处理损坏的包依赖关系" class="headerlink" title="5.处理损坏的包依赖关系"></a>5.处理损坏的包依赖关系</h4><p>有时在安装多个软件包时，某个包的软件依赖关系可能会被另一个包的安装覆盖掉。这叫作损坏的包依赖关系。可以使用以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br></pre></td></tr></table></figure>
+
+<p>然后试着用yum命令的update选项。如果还不能解决问题，使用以下命令试试：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum deplist package_name</span><br></pre></td></tr></table></figure>
+
+<p>如果还不能解决，最后一招：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update --skip-broken</span><br></pre></td></tr></table></figure>
+
+<p>–skip-broken选项允许你忽略依赖关系损坏的那个包，继续去更新其他软件包。这可能救不了损坏的包，但至少可以更新系统上的其他包。</p>
+<h4 id="6-yum软件仓库"><a href="#6-yum软件仓库" class="headerlink" title="6.yum软件仓库"></a>6.yum软件仓库</h4><p>查看当前正在从哪些仓库中获取软件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum repolist</span><br></pre></td></tr></table></figure>
+
+<p>如果仓库中没有需要的软件，可以编辑一下配置文件。yum的仓库定义文件位于/etc/yum.repos.d</p>
+<h3 id="二、从源码安装"><a href="#二、从源码安装" class="headerlink" title="二、从源码安装"></a>二、从源码安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./configure #检查系统</span><br><span class="line">make #构建二进制文件</span><br><span class="line">make install #安装</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/linux/">linux</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2022/05/01/Linux%E7%BC%96%E8%BE%91%E5%99%A8/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Linux编辑器</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2022/05/01/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+        <span class="next-text nav-default">Linux文件系统</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2022
+    <span class="footer-author">zjh.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> and <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
