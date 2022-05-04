@@ -57,8 +57,12 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220503230409177.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220503230821353.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220503232512793.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220504003601336.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220504004419030.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220504004724504.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220504010046715.png">
 <meta property="article:published_time" content="2022-05-02T13:10:20.000Z">
-<meta property="article:modified_time" content="2022-05-03T15:31:00.853Z">
+<meta property="article:modified_time" content="2022-05-03T17:01:50.662Z">
 <meta property="article:author" content="zjh">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -331,7 +335,95 @@
 <td>检查file1是否比file2旧</td>
 </tr>
 </tbody></table>
-<h3 id="五、复合条件测试"><a href="#五、复合条件测试" class="headerlink" title="五、复合条件测试"></a>五、复合条件测试</h3>
+<h3 id="五、复合条件测试"><a href="#五、复合条件测试" class="headerlink" title="五、复合条件测试"></a>五、复合条件测试</h3><p>if-then语句允许你使用布尔逻辑来组合测试。有两种布尔运算符可用：</p>
+<ul>
+<li>[ condition1 ] &amp;&amp; [ condition2 ]</li>
+<li>[ condition1 ] || [ condition2 ]</li>
+</ul>
+<p>第一种布尔运算使用AND布尔运算符来组合两个条件。要让then部分的命令执行，两个条件都必须满足。</p>
+<p>第二种布尔运算使用OR布尔运算符来组合两个条件。如果任意条件为TRUE，then部分的命令就会执行。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220504003601336.png" alt="image-20220504003601336"></p>
+<h3 id="六、if-then的高级特性"><a href="#六、if-then的高级特性" class="headerlink" title="六、if-then的高级特性"></a>六、if-then的高级特性</h3><h4 id="1-使用双括号"><a href="#1-使用双括号" class="headerlink" title="1.使用双括号"></a>1.使用双括号</h4><p>bash shell提供了两项可在if-then语句中使用的高级特性：</p>
+<ul>
+<li>用于数学表达式的双括号</li>
+<li>用于高级字符串处理功能的双方括号</li>
+</ul>
+<h5 id="1-1-使用双括号"><a href="#1-1-使用双括号" class="headerlink" title="1.1 使用双括号"></a>1.1 使用双括号</h5><p>双括号命令允许你在比较过程中使用高级数学表达式。test命令只能在比较中使用简单的算术操作。双括号命令提供了更多的数学符号，双括号命令的格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(( expression ))</span><br></pre></td></tr></table></figure>
+
+<p><strong>双括号命令符号</strong></p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>val++</td>
+<td>后增</td>
+</tr>
+<tr>
+<td>val–</td>
+<td>后减</td>
+</tr>
+<tr>
+<td>++val</td>
+<td>先增</td>
+</tr>
+<tr>
+<td>–val</td>
+<td>先减</td>
+</tr>
+<tr>
+<td>!</td>
+<td>逻辑求反</td>
+</tr>
+<tr>
+<td>~</td>
+<td>位求反</td>
+</tr>
+<tr>
+<td>^^</td>
+<td>幂运算</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>左位移</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右位移</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>位布尔和</td>
+</tr>
+<tr>
+<td>|</td>
+<td>位布尔或</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>逻辑和</td>
+</tr>
+<tr>
+<td>||</td>
+<td>逻辑或</td>
+</tr>
+</tbody></table>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220504004419030.png" alt="image-20220504004419030"></p>
+<h5 id="1-2使用双方括号"><a href="#1-2使用双方括号" class="headerlink" title="1.2使用双方括号"></a>1.2使用双方括号</h5><p>双方括号命令提供了针对字符串比较的高级特性。格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[ expression ]]</span><br></pre></td></tr></table></figure>
+
+<p>它提供了一个特性：模式匹配</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220504004724504.png" alt="image-20220504004724504"></p>
+<h3 id="七、case命令"><a href="#七、case命令" class="headerlink" title="七、case命令"></a>七、case命令</h3><p>case命令会采用列表格式来检查单个变量的多个值。格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">case variable in</span><br><span class="line">pattern1 | pattern2) commands1;;</span><br><span class="line">pattern3) commands2;;</span><br><span class="line">*) default commands;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<p>case会将指定的变量与不同模式进行比较。如果变量和模式是匹配的，那么shell会执行为该模式指定的命令。可以通过竖线操作符在一行中分隔出多个模式。星号会捕获所有与已知模式不匹配的值。例：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220504010046715.png" alt="image-20220504010046715"></p>
+
             </div>
           
 
@@ -348,6 +440,12 @@
         
         
   <nav class="post-nav">
+    
+      <a class="prev" href="/2022/05/04/Linux-shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B-%E6%9B%B4%E5%A4%9A%E7%BB%93%E6%9E%84%E5%8C%96%E5%91%BD%E4%BB%A4%EF%BC%88%E4%B8%89%EF%BC%89/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Linux-shell脚本编程-更多结构化命令（三）</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
     
     
       <a class="next" href="/2022/05/01/Linux-shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B-%E6%9E%84%E5%BB%BA%E5%9F%BA%E6%9C%AC%E8%84%9A%E6%9C%AC%EF%BC%88%E4%B8%80%EF%BC%89/">
