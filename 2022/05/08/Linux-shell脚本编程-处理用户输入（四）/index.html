@@ -54,8 +54,16 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220509221441221.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220509223728094.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220509224215480.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511225233672.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511225804615.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511230633273.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511232118468.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511233125775.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511233852683.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511234356844.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220512001326084.png">
 <meta property="article:published_time" content="2022-05-08T05:03:17.000Z">
-<meta property="article:modified_time" content="2022-05-09T14:45:56.175Z">
+<meta property="article:modified_time" content="2022-05-11T16:14:31.196Z">
 <meta property="article:author" content="zjh">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="shell">
@@ -176,7 +184,40 @@
 <p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220509223728094.png" alt="image-20220509223728094"></p>
 <p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220509224215480.png" alt="image-20220509224215480"></p>
 <p>$*变量会将所有参数都当成单个参数，而$@变量会单独处理每个参数。</p>
-<h3 id="三、移动变量"><a href="#三、移动变量" class="headerlink" title="三、移动变量"></a>三、移动变量</h3><h3 id="四、处理选项"><a href="#四、处理选项" class="headerlink" title="四、处理选项"></a>四、处理选项</h3><h3 id="五、将选项标准化"><a href="#五、将选项标准化" class="headerlink" title="五、将选项标准化"></a>五、将选项标准化</h3><h3 id="六、获得用户输入"><a href="#六、获得用户输入" class="headerlink" title="六、获得用户输入"></a>六、获得用户输入</h3>
+<h3 id="三、移动变量"><a href="#三、移动变量" class="headerlink" title="三、移动变量"></a>三、移动变量</h3><p>bash shell中有一个shift命令。该命令能够操作命令行参数，shift命令会根据它们的相对位置来移动命令行参数。使用shift命令时，默认情况下它会将参数变量向左移动一个位置，所以，变量$3的值会移到$2中，变量$2的值会移到$1中，而变量$1的值则会被删除，$0的值，即程序名，不会改变。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511225233672.png" alt="image-20220511225233672"></p>
+<p>使用shift命令，如果某个参数被移出，它的值就被丢弃，无法再恢复。</p>
+<p>可以一次性移动多个位置，只需要给shift命令提供一个参数，指明要移动的位置数就行了。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511225804615.png" alt="image-20220511225804615"></p>
+<p>通过使用shift命令的参数，跳过不需要的参数。</p>
+<h3 id="四、处理选项"><a href="#四、处理选项" class="headerlink" title="四、处理选项"></a>四、处理选项</h3><h4 id="1-查找选项"><a href="#1-查找选项" class="headerlink" title="1.查找选项"></a>1.查找选项</h4><h5 id="1-1-处理简单选项"><a href="#1-1-处理简单选项" class="headerlink" title="1.1 处理简单选项"></a>1.1 处理简单选项</h5><p>在提取每个单独参数时，用case语句来判断某个参数是否为选项。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511230633273.png" alt="image-20220511230633273"></p>
+<h5 id="1-2-分离参数和选项"><a href="#1-2-分离参数和选项" class="headerlink" title="1.2 分离参数和选项"></a>1.2 分离参数和选项</h5><p>在shell脚本中同时使用选项和参数时，常常遇到需要区分的情况。Linux中处理这个问题的标准方式是用特殊字符来将二者分开，该字符会告诉脚本何时选项结束以及普通参数何时开始。</p>
+<p>对于Linux来说，这个特殊字符是双破折线(–),在双破折线之后，脚本就可以放心地将剩下的命令行参数当做参数，而不是选项来处理了。</p>
+<p>要检查双破折线，只要在case语句中加一项就行了。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511232118468.png" alt="image-20220511232118468"></p>
+<h5 id="1-3-处理带值的选项"><a href="#1-3-处理带值的选项" class="headerlink" title="1.3 处理带值的选项"></a>1.3 处理带值的选项</h5><p>有时，命令行会以这种形式出现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./testing.sh -a test1 -b -c -d test2</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511233125775.png" alt="image-20220511233125775"></p>
+<h4 id="2-使用getopt命令"><a href="#2-使用getopt命令" class="headerlink" title="2.使用getopt命令"></a>2.使用getopt命令</h4><p>getopt命令可以识别命令行参数，从而在脚本中解析它们时更方便。</p>
+<p>命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getopt optstring parameters</span><br></pre></td></tr></table></figure>
+
+<p>optstring是这个过程的关键所在。它定义了命令行有效的选项字母，还定义了哪些选项字母需要参数值。</p>
+<p>首先，在optstring中列出你要在脚本中用到的每个命令行选项字母。然后，在每个需要参数值的选项字母后加一个冒号。getopt命令会基于你定义的optstring解析提供的参数。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511233852683.png" alt="image-20220511233852683"></p>
+<p>optstring 定义了四个有效选项字母：a、b、c和d。冒号（:）被放在了字母b后面，因为b选项需要一个参数值。当getopt命令运行时，它会检查提供的参数列表（-a -b test1 -cd test2 test3）,并基于提供的optstring进行解析。它会将-cd选项分成两个单独的选项，并插入双破折线来分隔行中的额外参数。</p>
+<p>如果指定了一个不在getoptstring中的选项，会产生错误信息，可以通过-q选项来忽略。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511234356844.png" alt="image-20220511234356844"></p>
+<h5 id="2-1-在脚本中使用getopt"><a href="#2-1-在脚本中使用getopt" class="headerlink" title="2.1 在脚本中使用getopt"></a>2.1 在脚本中使用getopt</h5><p>在脚本中使用getopt来格式化脚本所携带的命令行选项或参数。</p>
+<p>方法是用getopt命令生成的格式化后的版本替换已有的命令行选项和参数。利用set命令可以做到。</p>
+<p>set命令的选项之一是双破折线(–)，它会将命令行参数替换成set命令的命令行值。</p>
+<p>过程是把原始脚本的命令行参数传给getopt命令，之后再将getopt命令的输出传给set命令，用getopt格式化后的命令行参数，替换原始的命令行参数：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set -- $(getopt -q ab:cd &quot;$@&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220512001326084.png" alt="image-20220512001326084"></p>
+<h4 id="3-使用高级的getopts"><a href="#3-使用高级的getopts" class="headerlink" title="3.使用高级的getopts"></a>3.使用高级的getopts</h4><h3 id="五、将选项标准化"><a href="#五、将选项标准化" class="headerlink" title="五、将选项标准化"></a>五、将选项标准化</h3><h3 id="六、获得用户输入"><a href="#六、获得用户输入" class="headerlink" title="六、获得用户输入"></a>六、获得用户输入</h3>
             </div>
           
 
