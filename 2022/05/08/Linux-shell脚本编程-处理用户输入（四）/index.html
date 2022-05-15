@@ -62,8 +62,20 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511233852683.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220511234356844.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220512001326084.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515102634902.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515103432104.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515103540963.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515104258210.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515105658215.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515110418245.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515111545401.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515111850737.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515112212964.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515112739189.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515113620271.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515113931086.png">
 <meta property="article:published_time" content="2022-05-08T05:03:17.000Z">
-<meta property="article:modified_time" content="2022-05-11T16:14:31.196Z">
+<meta property="article:modified_time" content="2022-05-15T03:47:29.230Z">
 <meta property="article:author" content="zjh">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="shell">
@@ -217,7 +229,113 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set -- $(getopt -q ab:cd &quot;$@&quot;)</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220512001326084.png" alt="image-20220512001326084"></p>
-<h4 id="3-使用高级的getopts"><a href="#3-使用高级的getopts" class="headerlink" title="3.使用高级的getopts"></a>3.使用高级的getopts</h4><h3 id="五、将选项标准化"><a href="#五、将选项标准化" class="headerlink" title="五、将选项标准化"></a>五、将选项标准化</h3><h3 id="六、获得用户输入"><a href="#六、获得用户输入" class="headerlink" title="六、获得用户输入"></a>六、获得用户输入</h3>
+<h4 id="3-使用高级的getopts"><a href="#3-使用高级的getopts" class="headerlink" title="3.使用高级的getopts"></a>3.使用高级的getopts</h4><p>getopts命令能够和已有的shell参数变量配合。每次调用它时，它一次只处理命令行上检测到的一个参数。处理完所有的参数后，它会退出并返回一个大于0的退出状态码。很适合用于解析命令行所有参数的循环中。getopts的命令格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getopts optstring variable</span><br></pre></td></tr></table></figure>
+
+<p>optstring类似于getopt命令中的那个。有效的选项字母都会列在optstring中，如果选项字母要求有个参数值，就加一个冒号。要去掉错误消息的话，可以在optstring之前加一个冒号。getopts命令将当前参数保存在命令行中定义的variables中。</p>
+<p>getopts命令会用到两个环境变量。如果选项需要跟一个参数值，OPTARG环境变量就会保存这个值。OPTIND环境变量保存了参数列表中getopts正在处理的参数位置。这样就能在处理完选项之后继续处理其他命令行参数了。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515102634902.png" alt="image-20220515102634902"></p>
+<p>getopts命令指明了要查找哪些命令行选项，以及每次迭代中存储它们的变量名（opt）。getopts命令解析命令行选项时会移除开头的单破折线，所以在case定义中不用单破折线。</p>
+<p>getopts有几个好用的功能。它可以在参数值中包含空格；可以把选项字母和参数值放在一起使用，不用加空格。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515103432104.png" alt="image-20220515103432104"></p>
+<p>getopts还可以把命令行上找到的所有未定义的选项统一输出成问号。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515103540963.png" alt="image-20220515103540963"></p>
+<p>将未定义的选择字母以问号形式发给代码。</p>
+<p>getopts处理每个选项时，会将OPTIND环境变量值增一。在getopts完成处理时，可以使用shift命令和OPTIND值来移动参数。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515104258210.png" alt="image-20220515104258210"></p>
+<p>这样就可以处理脚本中的全功能命令行选项和参数了。</p>
+<h3 id="五、将选项标准化"><a href="#五、将选项标准化" class="headerlink" title="五、将选项标准化"></a>五、将选项标准化</h3><p><strong>常用的Linux命令选项</strong></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示所有对象</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>生成一个计数</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>指定一个目录</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>扩展一个对象</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定读入数据的文件</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>显示命令的帮助信息</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>忽略文本大小写</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>产生输出的长格式脚本</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>使用非交互模式（批处理）</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>将所有输出重定向到指定的输出文件</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>以安静模式运行</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归地处理目录和文件</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>以安静模式运行</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>生成详细输出</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>排除某个对象</td>
+</tr>
+<tr>
+<td>-y</td>
+<td>对所有问题回答yes</td>
+</tr>
+</tbody></table>
+<p>如果在脚本中的选项也采用同样的含义，这样用户在使用脚本的时候就不用去查手册了。</p>
+<h3 id="六、获得用户输入（read"><a href="#六、获得用户输入（read" class="headerlink" title="六、获得用户输入（read)"></a>六、获得用户输入（read)</h3><h4 id="1-基本的读取"><a href="#1-基本的读取" class="headerlink" title="1.基本的读取"></a>1.基本的读取</h4><p>read命令从标准输入（键盘）或另一个文件描述符中接受输入。然后将数据放进一个变量。一个简单用法：</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515105658215.png" alt="image-20220515105658215"></p>
+<p>-n选项可以让用户紧跟其后输入数据，而不是下一行。read命令包含了-p选项，可以直接在read命令行指定提示符。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515110418245.png" alt="image-20220515110418245"></p>
+<p>read命令会将提示符后输入的所有数据分配给单个变量，要么就指定多个变量。输入的每个数据值都会分配给变量列表中的下一个变量。如果变量数量不够，剩下的数据就全部分配给最后一个变量。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515111545401.png" alt="image-20220515111545401"></p>
+<p>read命令行也可以不指定变量。如果是这样，read命令会将它收到的任何数据都放进特殊环境变量REPLY中。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515111850737.png" alt="image-20220515111850737"></p>
+<h4 id="2-超时"><a href="#2-超时" class="headerlink" title="2.超时"></a>2.超时</h4><p>使用-t选项可以指定一个计时器，参数是等待输入的秒数。当计时器过期后，read命令会返回一个非零退出状态码。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515112212964.png" alt="image-20220515112212964"></p>
+<p>read命令也可以根据输入的字符的字节数来结束。当输入的字符达到预设的字符数时，就自动退出。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515112739189.png" alt="image-20220515112739189"></p>
+<p>-n选项和值1一起使用，告诉read命令在接受单个字符后退出。只要按下单个字符回答后，read命令就接受输入并将它传给变量，无需按回车键。</p>
+<h4 id="3-隐藏方式读取"><a href="#3-隐藏方式读取" class="headerlink" title="3.隐藏方式读取"></a>3.隐藏方式读取</h4><p>比如在输入密码的时候，需要隐藏输入信息。-s选项可以避免输入显示在屏幕上。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515113620271.png" alt="image-20220515113620271"></p>
+<h4 id="4-从文件中读取"><a href="#4-从文件中读取" class="headerlink" title="4.从文件中读取"></a>4.从文件中读取</h4><p>read命令读取文件时，每次调用会从文件中读取一行文本。当文本没有内容时，它会退出并返回非零状态码。</p>
+<p><img src="https://raw.githubusercontent.com/calm-always/picture/main/img/image-20220515113931086.png" alt="image-20220515113931086"></p>
+
             </div>
           
 
